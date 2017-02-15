@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CombatForms
+namespace ZUtilities.FSM.Combat
 {
-    class Combat
+    interface IHealable
     {
-        private int m_turn;
-
-        
+        void RestoreHealth(int amount);
     }
 }

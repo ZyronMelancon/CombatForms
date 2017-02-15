@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZUtilities.FSM.Combat
+namespace ZUtilities.FSM
 {
-    interface IDamageable
+    interface IState
     {
-        void TakeDamage(int dam);
+        void ThisStateFunction();
     }
 }

@@ -3,30 +3,91 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZUtilities.FSM.Combat;
 
-namespace CombatForms
+namespace ZUtilities.FSM
 {
-    class Player : IDamageable
+    class Player : IDamageable, IDamager, IHealable
     {
-        //Stats
-        private int m_hp;   //Health
-        private int m_mana; //Mana
-        private int m_spd;  //Speed
-        private int m_def;  //Added defense
-        private int m_atk;  //Added attack power
+        //Player parameters
+        string m_name;
+        Dictionary<string, int> m_stats;
+        Dictionary<Item, int> m_inv;
 
-        public int HP { get { return m_hp; } set { m_hp = value; } }
-        public int Mana { get { return m_mana; } set { m_mana = value; } }
-        public int Speed { get { return m_spd; } set { m_spd = value; } }
-        public int Defense { get { return m_def; } set { m_def = value; } }
-        public int ExtraAttack { get { return m_atk; } set { m_atk = value; } }
+        public string Name { get { return m_name; } set { m_name = value; } }
+        public Dictionary<string, int> Stats { get { return m_stats; } set { m_stats = value; } }
+        public Dictionary<Item, int> Inventory { get { return m_inv; } set { m_inv = value; } }
 
-
-        //Functions
-        public void TakeDamage(int d)
+        //Player construction functions
+        public void AddStat(string name, int val)
         {
-            HP = HP - (d - Defense);
+            Stats.Add(name, val);
         }
 
+        public void RemoveStat(string name)
+        {
+            Stats.Remove(name);
+        }
+
+        public void AlterStat(string name, int val)
+        {
+            Stats[name] += val;
+        }
+
+        public void AddItem(Item item, int amount)
+        {
+            if (Inventory.ContainsKey(item))
+                Inventory[item] += amount;
+            else
+                Inventory.Add(item, amount);
+        }
+
+        public void RemoveItem(Item item, int amount)
+        {
+            if (Inventory.ContainsKey(item))
+            {
+                if (Inventory[item] >= amount)
+                    Inventory[item] -= amount;
+                if (Inventory[item] <= 0)
+                    Inventory.Remove(item);
+            }
+        }
+
+        public void GiveDamage(IDamageable other, int amount)
+        {
+            other.TakeDamage(amount);
+        }
+
+        public void TakeDamage(int dam)
+        {
+            Stats["Health"] -= dam;
+        }
+
+        public void RestoreHealth(int amount)
+        {
+            Stats["Health"] += amount;
+        }
+
+
+        public delegate void onEndTurn();
+
+        public onEndTurn OnEndTurn;
+
+        public void EndTurn()
+        {
+            if (OnEndTurn != null)
+                OnEndTurn.Invoke();
+        }
+
+
+        public Player(string name)
+        {
+            Name = name;
+            Stats.Add("Health", 100);
+            Stats.Add("Mana", 25);
+            Stats.Add("Speed", 10);
+            Stats.Add("Attack", 15);
+            Stats.Add("Defense", 15);
+        }
     }
 }

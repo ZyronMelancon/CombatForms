@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ZUtilities.FSM.Combat
 {
-    interface IDamageable
+    interface IHealer
     {
-        void TakeDamage(int dam);
+        void Heal(IHealable other, int amount);
     }
 }
