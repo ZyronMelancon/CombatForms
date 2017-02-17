@@ -15,8 +15,10 @@ namespace ZUtilities.FSM
         public Player CurrentPlayer { get { return Members[m_curpla]; } }
         public List<Player> Members { get { return m_memb; } set { m_memb = value; } }
 
-
-
-
+        public Party(Player a)
+        {
+            m_curpla = 0;
+            Members.Add(a);
+        }
     }
 }

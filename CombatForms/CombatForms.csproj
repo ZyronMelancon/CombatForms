@@ -58,7 +58,6 @@
     <Compile Include="IDamager.cs" />
     <Compile Include="IHealable.cs" />
     <Compile Include="IHealer.cs" />
-    <Compile Include="IState.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Party.cs" />
     <Compile Include="Player.cs" />

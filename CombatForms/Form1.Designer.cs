@@ -39,6 +39,8 @@
             this.PlayerHealth = new System.Windows.Forms.Label();
             this.EnemyHealth = new System.Windows.Forms.Label();
             this.NextButton = new System.Windows.Forms.Button();
+            this.PhaseCounter = new System.Windows.Forms.Label();
+            this.CurrentState = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Hand1
@@ -141,12 +143,33 @@
             this.NextButton.TabIndex = 10;
             this.NextButton.Text = "Next";
             this.NextButton.UseVisualStyleBackColor = true;
+            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
+            // 
+            // PhaseCounter
+            // 
+            this.PhaseCounter.AutoSize = true;
+            this.PhaseCounter.Location = new System.Drawing.Point(20, 33);
+            this.PhaseCounter.Name = "PhaseCounter";
+            this.PhaseCounter.Size = new System.Drawing.Size(49, 13);
+            this.PhaseCounter.TabIndex = 11;
+            this.PhaseCounter.Text = "Phase: 1";
+            // 
+            // CurrentState
+            // 
+            this.CurrentState.AutoSize = true;
+            this.CurrentState.Location = new System.Drawing.Point(20, 59);
+            this.CurrentState.Name = "CurrentState";
+            this.CurrentState.Size = new System.Drawing.Size(72, 13);
+            this.CurrentState.TabIndex = 12;
+            this.CurrentState.Text = "Current State:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 503);
+            this.Controls.Add(this.CurrentState);
+            this.Controls.Add(this.PhaseCounter);
             this.Controls.Add(this.NextButton);
             this.Controls.Add(this.EnemyHealth);
             this.Controls.Add(this.PlayerHealth);
@@ -178,6 +201,8 @@
         private System.Windows.Forms.Label PlayerHealth;
         private System.Windows.Forms.Label EnemyHealth;
         private System.Windows.Forms.Button NextButton;
+        private System.Windows.Forms.Label PhaseCounter;
+        private System.Windows.Forms.Label CurrentState;
     }
 }
 

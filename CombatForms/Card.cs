@@ -15,15 +15,9 @@ namespace ZUtilities.FSM
 
         int power;
 
-
-        public void GiveDamage(IDamageable other)
-        {
-            other.TakeDamage(power);
-        }
-
         public void GiveDamage(IDamageable other, int amount)
         {
-            throw new NotImplementedException();
+            other.TakeDamage(amount);
         }
     }
 }

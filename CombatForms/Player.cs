@@ -12,11 +12,9 @@ namespace ZUtilities.FSM
         //Player parameters
         string m_name;
         Dictionary<string, int> m_stats;
-        Dictionary<Item, int> m_inv;
 
         public string Name { get { return m_name; } set { m_name = value; } }
         public Dictionary<string, int> Stats { get { return m_stats; } set { m_stats = value; } }
-        public Dictionary<Item, int> Inventory { get { return m_inv; } set { m_inv = value; } }
 
         //Player construction functions
         public void AddStat(string name, int val)
@@ -32,25 +30,6 @@ namespace ZUtilities.FSM
         public void AlterStat(string name, int val)
         {
             Stats[name] += val;
-        }
-
-        public void AddItem(Item item, int amount)
-        {
-            if (Inventory.ContainsKey(item))
-                Inventory[item] += amount;
-            else
-                Inventory.Add(item, amount);
-        }
-
-        public void RemoveItem(Item item, int amount)
-        {
-            if (Inventory.ContainsKey(item))
-            {
-                if (Inventory[item] >= amount)
-                    Inventory[item] -= amount;
-                if (Inventory[item] <= 0)
-                    Inventory.Remove(item);
-            }
         }
 
         public void GiveDamage(IDamageable other, int amount)
@@ -82,6 +61,7 @@ namespace ZUtilities.FSM
 
         public Player(string name)
         {
+            Dictionary<string, int> Stats = new Dictionary<string, int>();
             Name = name;
             Stats.Add("Health", 100);
             Stats.Add("Mana", 25);
