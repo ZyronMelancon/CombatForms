@@ -12,10 +12,8 @@ namespace ZUtilities.FSM
         //Player parameters
         public string Name { get; set; }
         public int PlayerNum { get; set; }
-
         public List<Card> Deck { get; set; } = new List<Card>();
         public List<Card> Hand { get; set; } = new List<Card>();
-
         public Dictionary<string, int> Stats { get; set; }
 
         //Player stat functions
@@ -43,43 +41,30 @@ namespace ZUtilities.FSM
         }
 
         //Card functions
-        public void RandomDeck(int size)
+        public void AddCard(Card c)
         {
-            Deck = new List<Card>();
-
-            Random r = new Random();
-            string n = "";
-
-            for (int i = 0; i < size; i++)
-            {
-                switch (r.Next(1, 3))
-                {
-                    case 1:
-                        n = "ATK";
-                        break;
-                    case 2:
-                        n = "DEF";
-                        break;
-                    case 3:
-                        n = "SPD";
-                        break;
-                    default:
-                        break;
-                }
-
-                Deck.Add(new Card(n, r.Next(5, 15), PlayerNum));
-
-            }
+            Deck.Add(c);
         }
 
         public void Draw()
         {
-            while (Hand.Count < 4)
-            {
-                Hand.Add(Deck[0]);
-                Deck.RemoveAt(0);
-            }
+                while (Deck.Count > 0)
+                {
+                    if (Hand.Count > 3)
+                        break;
+                    else
+                    {
+                        Hand.Add(Deck[0]);
+                        Deck.RemoveAt(0);
+                    }
+                }
         }
+
+        public Card SetCard(int num)
+        {
+            return Hand[num];
+        }
+
 
         //delegate bulls&#*
         public delegate void onEndTurn();

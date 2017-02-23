@@ -42,7 +42,7 @@
             this.PhaseCounter = new System.Windows.Forms.Label();
             this.CurrentState = new System.Windows.Forms.Label();
             this.EnemySpeed = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.PlayerSpeed = new System.Windows.Forms.Label();
             this.LogBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -54,6 +54,7 @@
             this.Hand1.TabIndex = 0;
             this.Hand1.Text = "Hand1";
             this.Hand1.UseVisualStyleBackColor = true;
+            this.Hand1.Click += new System.EventHandler(this.Hand1_Click);
             // 
             // Hand2
             // 
@@ -63,6 +64,7 @@
             this.Hand2.TabIndex = 1;
             this.Hand2.Text = "Hand2";
             this.Hand2.UseVisualStyleBackColor = true;
+            this.Hand2.Click += new System.EventHandler(this.Hand2_Click);
             // 
             // Hand3
             // 
@@ -72,6 +74,7 @@
             this.Hand3.TabIndex = 2;
             this.Hand3.Text = "Hand3";
             this.Hand3.UseVisualStyleBackColor = true;
+            this.Hand3.Click += new System.EventHandler(this.Hand3_Click);
             // 
             // Hand4
             // 
@@ -81,6 +84,7 @@
             this.Hand4.TabIndex = 3;
             this.Hand4.Text = "Hand4";
             this.Hand4.UseVisualStyleBackColor = true;
+            this.Hand4.Click += new System.EventHandler(this.Hand4_Click);
             // 
             // Field1
             // 
@@ -176,20 +180,22 @@
             this.EnemySpeed.Text = "Speed: 50";
             this.EnemySpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // PlayerSpeed
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(224, 193);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Speed: 50";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.PlayerSpeed.AutoSize = true;
+            this.PlayerSpeed.Location = new System.Drawing.Point(224, 193);
+            this.PlayerSpeed.Name = "PlayerSpeed";
+            this.PlayerSpeed.Size = new System.Drawing.Size(56, 13);
+            this.PlayerSpeed.TabIndex = 14;
+            this.PlayerSpeed.Text = "Speed: 50";
+            this.PlayerSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LogBox
             // 
             this.LogBox.Location = new System.Drawing.Point(358, 56);
             this.LogBox.Name = "LogBox";
+            this.LogBox.ReadOnly = true;
+            this.LogBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.LogBox.Size = new System.Drawing.Size(129, 263);
             this.LogBox.TabIndex = 15;
             this.LogBox.Text = "";
@@ -200,7 +206,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(525, 503);
             this.Controls.Add(this.LogBox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.PlayerSpeed);
             this.Controls.Add(this.EnemySpeed);
             this.Controls.Add(this.CurrentState);
             this.Controls.Add(this.PhaseCounter);
@@ -238,7 +244,7 @@
         private System.Windows.Forms.Label PhaseCounter;
         private System.Windows.Forms.Label CurrentState;
         private System.Windows.Forms.Label EnemySpeed;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label PlayerSpeed;
         private System.Windows.Forms.RichTextBox LogBox;
     }
 }
