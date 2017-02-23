@@ -7,16 +7,18 @@ using ZUtilities.FSM.Combat;
 
 namespace ZUtilities.FSM
 {
-    class Player : IDamageable, IDamager, IHealable
+    class Player : IDamageable
     {
         //Player parameters
-        string m_name;
-        Dictionary<string, int> m_stats;
+        public string Name { get; set; }
+        public int PlayerNum { get; set; }
 
-        public string Name { get { return m_name; } set { m_name = value; } }
-        public Dictionary<string, int> Stats { get { return m_stats; } set { m_stats = value; } }
+        public List<Card> Deck { get; set; } = new List<Card>();
+        public List<Card> Hand { get; set; } = new List<Card>();
 
-        //Player construction functions
+        public Dictionary<string, int> Stats { get; set; }
+
+        //Player stat functions
         public void AddStat(string name, int val)
         {
             Stats.Add(name, val);
@@ -32,22 +34,54 @@ namespace ZUtilities.FSM
             Stats[name] += val;
         }
 
-        public void GiveDamage(IDamageable other, int amount)
+        public void TakeDamage(string type, int dam)
         {
-            other.TakeDamage(amount);
+            if (Stats[type] >= dam)
+                Stats[type] -= dam;
+            else
+                Stats[type] = 0;
         }
 
-        public void TakeDamage(int dam)
+        //Card functions
+        public void RandomDeck(int size)
         {
-            Stats["Health"] -= dam;
+            Deck = new List<Card>();
+
+            Random r = new Random();
+            string n = "";
+
+            for (int i = 0; i < size; i++)
+            {
+                switch (r.Next(1, 3))
+                {
+                    case 1:
+                        n = "ATK";
+                        break;
+                    case 2:
+                        n = "DEF";
+                        break;
+                    case 3:
+                        n = "SPD";
+                        break;
+                    default:
+                        break;
+                }
+
+                Deck.Add(new Card(n, r.Next(5, 15), PlayerNum));
+
+            }
         }
 
-        public void RestoreHealth(int amount)
+        public void Draw()
         {
-            Stats["Health"] += amount;
+            while (Hand.Count < 4)
+            {
+                Hand.Add(Deck[0]);
+                Deck.RemoveAt(0);
+            }
         }
 
-
+        //delegate bulls&#*
         public delegate void onEndTurn();
 
         public onEndTurn OnEndTurn;
@@ -57,17 +91,15 @@ namespace ZUtilities.FSM
             if (OnEndTurn != null)
                 OnEndTurn.Invoke();
         }
-
-
-        public Player(string name)
+        //Constructor
+        public Player(string name, int pnum)
         {
-            Dictionary<string, int> Stats = new Dictionary<string, int>();
+            PlayerNum = pnum;
+            Stats = new Dictionary<string, int>();
             Name = name;
             Stats.Add("Health", 100);
-            Stats.Add("Mana", 25);
-            Stats.Add("Speed", 10);
-            Stats.Add("Attack", 15);
-            Stats.Add("Defense", 15);
+            Stats.Add("Speed", 50);
+            Stats.Add("Defense", 0);
         }
     }
 }

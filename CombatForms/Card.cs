@@ -11,13 +11,21 @@ namespace ZUtilities.FSM
     {
         string m_name;
         string m_type;
-        string m_desc;
+        int m_pwr;
+        int m_pnum;
 
-        int power;
-
-        public void GiveDamage(IDamageable other, int amount)
+        public int PlayerNum { get { return m_pnum; } set { m_pnum = value; } }
+        public void GiveDamage(IDamageable other, string type, int amount)
         {
-            other.TakeDamage(amount);
+            other.TakeDamage(type, amount);
+        }
+
+        public Card(string type, int pwr, int pnum)
+        {
+            m_type = type;
+            m_pwr = pwr;
+            m_pnum = pnum;
+            m_name = type + "\n" + pwr;
         }
     }
 }

@@ -15,10 +15,23 @@ namespace ZUtilities.FSM
         public Player CurrentPlayer { get { return Members[m_curpla]; } }
         public List<Player> Members { get { return m_memb; } set { m_memb = value; } }
 
-        public Party(Player a)
+        public void AddMember(Player a)
+        {
+            Members.Add(a);
+            a.OnEndTurn += NextPlayer;
+        }
+
+        public void NextPlayer()
+        {
+            if (m_curpla < Members.Count() - 1)
+                m_curpla++;
+            else
+                m_curpla = 0;
+        }
+
+        public Party()
         {
             m_curpla = 0;
-            Members.Add(a);
         }
     }
 }

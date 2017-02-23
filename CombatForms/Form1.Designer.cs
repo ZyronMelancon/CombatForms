@@ -41,6 +41,9 @@
             this.NextButton = new System.Windows.Forms.Button();
             this.PhaseCounter = new System.Windows.Forms.Label();
             this.CurrentState = new System.Windows.Forms.Label();
+            this.EnemySpeed = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.LogBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // Hand1
@@ -118,7 +121,7 @@
             // PlayerHealth
             // 
             this.PlayerHealth.AutoSize = true;
-            this.PlayerHealth.Location = new System.Drawing.Point(180, 190);
+            this.PlayerHealth.Location = new System.Drawing.Point(132, 193);
             this.PlayerHealth.Name = "PlayerHealth";
             this.PlayerHealth.Size = new System.Drawing.Size(62, 13);
             this.PlayerHealth.TabIndex = 8;
@@ -128,7 +131,7 @@
             // EnemyHealth
             // 
             this.EnemyHealth.AutoSize = true;
-            this.EnemyHealth.Location = new System.Drawing.Point(180, 9);
+            this.EnemyHealth.Location = new System.Drawing.Point(132, 9);
             this.EnemyHealth.Name = "EnemyHealth";
             this.EnemyHealth.Size = new System.Drawing.Size(62, 13);
             this.EnemyHealth.TabIndex = 9;
@@ -137,7 +140,7 @@
             // 
             // NextButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(322, 259);
+            this.NextButton.Location = new System.Drawing.Point(425, 402);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(75, 38);
             this.NextButton.TabIndex = 10;
@@ -148,7 +151,7 @@
             // PhaseCounter
             // 
             this.PhaseCounter.AutoSize = true;
-            this.PhaseCounter.Location = new System.Drawing.Point(20, 33);
+            this.PhaseCounter.Location = new System.Drawing.Point(20, 22);
             this.PhaseCounter.Name = "PhaseCounter";
             this.PhaseCounter.Size = new System.Drawing.Size(49, 13);
             this.PhaseCounter.TabIndex = 11;
@@ -157,17 +160,48 @@
             // CurrentState
             // 
             this.CurrentState.AutoSize = true;
-            this.CurrentState.Location = new System.Drawing.Point(20, 59);
+            this.CurrentState.Location = new System.Drawing.Point(20, 87);
             this.CurrentState.Name = "CurrentState";
             this.CurrentState.Size = new System.Drawing.Size(72, 13);
             this.CurrentState.TabIndex = 12;
             this.CurrentState.Text = "Current State:";
             // 
+            // EnemySpeed
+            // 
+            this.EnemySpeed.AutoSize = true;
+            this.EnemySpeed.Location = new System.Drawing.Point(224, 9);
+            this.EnemySpeed.Name = "EnemySpeed";
+            this.EnemySpeed.Size = new System.Drawing.Size(56, 13);
+            this.EnemySpeed.TabIndex = 13;
+            this.EnemySpeed.Text = "Speed: 50";
+            this.EnemySpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(224, 193);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Speed: 50";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LogBox
+            // 
+            this.LogBox.Location = new System.Drawing.Point(358, 56);
+            this.LogBox.Name = "LogBox";
+            this.LogBox.Size = new System.Drawing.Size(129, 263);
+            this.LogBox.TabIndex = 15;
+            this.LogBox.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 503);
+            this.ClientSize = new System.Drawing.Size(525, 503);
+            this.Controls.Add(this.LogBox);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.EnemySpeed);
             this.Controls.Add(this.CurrentState);
             this.Controls.Add(this.PhaseCounter);
             this.Controls.Add(this.NextButton);
@@ -203,6 +237,9 @@
         private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.Label PhaseCounter;
         private System.Windows.Forms.Label CurrentState;
+        private System.Windows.Forms.Label EnemySpeed;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox LogBox;
     }
 }
 

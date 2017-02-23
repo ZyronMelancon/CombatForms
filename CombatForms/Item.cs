@@ -15,7 +15,7 @@ namespace ZUtilities.FSM
         Mana = 3
     }
 
-    class Item : IHealer, IDamager
+    class Item
     {
         string m_name;
         string m_desc;
@@ -28,34 +28,5 @@ namespace ZUtilities.FSM
         public int Type { get { return m_type; } set { m_type = value; } }
         public int Power {  get { return m_pwr; } set { m_pwr = value; } }
         public bool Stackable { get { return m_stack; } set { m_stack = value; } }
-
-        public void Heal(IHealable other, int amount)
-        {
-            other.RestoreHealth(amount);
-        }
-
-        public void GiveDamage(IDamageable other, int amount)
-        {
-            other.TakeDamage(amount);
-        }
-
-        public void Use(Player directed)
-        {
-            switch (m_type)
-            {
-                case (int)ItemTypes.Heal:
-                    Heal(directed, Power);
-                    break;
-                case (int)ItemTypes.Damage:
-                    GiveDamage(directed, Power);
-                    break;
-                //case (int)ItemTypes.Mana:
-                //    break;
-                //case (int)ItemTypes.Speed:
-                //    break;
-                default:
-                    break;
-            }
-        }
     }
 }

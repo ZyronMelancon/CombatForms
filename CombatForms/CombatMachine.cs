@@ -11,12 +11,12 @@ namespace ZUtilities.FSM
     {
         int m_phase;
         int m_stateno;
-        List<IState> States = new List<IState>();
+        List<State> States = new List<State>();
         public List<Party> Parties = new List<Party>();
-        IState current;
+        State current;
 
         public int Phase { get { return m_phase; } }
-        public IState CurrentState { get { return current; } }
+        public State CurrentState { get { return current; } }
 
         //Functions
 
@@ -25,7 +25,7 @@ namespace ZUtilities.FSM
             Parties.Add(p);
         }
 
-        public void AddState(IState newstate)
+        public void AddState(State newstate)
         {
             States.Add(newstate);
 
@@ -41,7 +41,7 @@ namespace ZUtilities.FSM
                 m_stateno++;
             else
             {
-                m_stateno = 0;
+                m_stateno = 1;
                 m_phase++;
             }
 
@@ -56,32 +56,37 @@ namespace ZUtilities.FSM
 
     }
 
-
-
-
-
-    //ISTate
-    interface IState
-    {
-        void StateInit();
-        void Hand1Hit();
-        void Hand2Hit();
-        void Hand3Hit();
-        void Hand4Hit();
-        void Field1Hit();
-        void Field2Hit();
-    }
-
-
-
-
-
     //All States under here
 
-
-    class InitState : IState
+    abstract class State
     {
-        string m_name = "Start";
+        abstract public string Name { get; }
+        abstract public string Desc { get; }
+        Button f1;
+        Button f2;
+        Button f3;
+        Button f4;
+        Button h1;
+        Button h2;
+        Button h3;
+        Button h4;
+        Button n;
+        Player p;
+        Player e;
+        abstract public void StateInit();
+        abstract public void Hand1Hit();
+        abstract public void Hand2Hit();
+        abstract public void Hand3Hit();
+        abstract public void Hand4Hit();
+        abstract public void Field1Hit();
+        abstract public void Field2Hit();
+    }
+
+    class InitState : State
+    {
+        public override string Name { get {return "Start";} }
+        public override string Desc { get { return "Start state thing lmao"; } }
+
         Button f1;
         Button f2;
         Button f3;
@@ -94,43 +99,49 @@ namespace ZUtilities.FSM
         Player p;
         Player e;
 
-        public void StateInit()
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public override void StateInit()
         {
             f1.Enabled = false;
             f2.Enabled = false;
+            f3.Enabled = false;
+            f4.Enabled = false;
+            h1.Enabled = false;
+            h2.Enabled = false;
+            h3.Enabled = false;
+            h4.Enabled = false;
         }
 
-        public override string ToString()
-        {
-            return m_name;
-        }
-
-        public void Hand1Hit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Hand2Hit()
+        public override void Hand1Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void Hand3Hit()
+        public override void Hand2Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void Hand4Hit()
+        public override void Hand3Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void Field1Hit()
+        public override void Hand4Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void Field2Hit()
+        public override void Field1Hit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Field2Hit()
         {
             throw new NotImplementedException();
         }
@@ -151,51 +162,83 @@ namespace ZUtilities.FSM
         }
     }
 
-    class PlayerChooseState : IState
+    class PlayerChooseState : State
     {
-        string m_name = "PlayerChoose";
+        public override string Name { get { return "PlayerChoose"; } }
+        public override string Desc { get { return "\nPlayer, choose your cards."; } }
+        Button f1;
+        Button f2;
+        Button f3;
+        Button f4;
+        Button h1;
+        Button h2;
+        Button h3;
+        Button h4;
+        Button n;
+        Player p;
+        Player e;
 
         public override string ToString()
         {
-            return m_name;
+            return Name;
         }
 
-        public void Field1Hit()
+        public override void StateInit()
+        {
+            f1.Enabled = false;
+            f2.Enabled = false;
+            f3.Enabled = false;
+            f4.Enabled = false;
+            h1.Enabled = true;
+            h2.Enabled = true;
+            h3.Enabled = true;
+            h4.Enabled = true;
+        }
+
+        public override void Hand1Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void Field2Hit()
+        public override void Hand2Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void Hand1Hit()
+        public override void Hand3Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void Hand2Hit()
+        public override void Hand4Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void Hand3Hit()
+        public override void Field1Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void Hand4Hit()
+        public override void Field2Hit()
         {
             throw new NotImplementedException();
         }
 
-        public void StateInit()
+        public PlayerChooseState(Button fi1, Button fi2, Button fi3, Button fi4, Button ha1, Button ha2, Button ha3, Button ha4, Button na, Player pa, Player ea)
         {
-            
+            f1 = fi1;
+            f2 = fi2;
+            f3 = fi3;
+            f4 = fi4;
+            h1 = ha1;
+            h2 = ha2;
+            h3 = ha3;
+            h4 = ha4;
+            n = na;
+            p = pa;
+            e = ea;
         }
-
-
 
     }
 }

@@ -8,6 +8,6 @@ namespace ZUtilities.FSM.Combat
 {
     interface IDamageable
     {
-        void TakeDamage(int dam);
+        void TakeDamage(string type, int dam);
     }
 }
